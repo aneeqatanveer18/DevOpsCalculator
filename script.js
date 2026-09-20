@@ -9,8 +9,7 @@ function appendNumber(number) {
     if (display.innerText === "0" || waitingForSecondNumber) {
         display.innerText = number;
         waitingForSecondNumber = false;
-    } 
-    else {
+    } else {
         display.innerText += number;
     }
 }
@@ -40,14 +39,11 @@ function calculate() {
 
     if (operator === "+") {
         result = num1 + num2;
-    }
-    else if (operator === "-") {
+    } else if (operator === "-") {
         result = num1 - num2;
-    }
-    else if (operator === "*") {
+    } else if (operator === "*") {
         result = num1 * num2;
-    }
-    else if (operator === "/") {
+    } else if (operator === "/") {
 
         if (num2 === 0) {
             display.innerText = "Error";
@@ -76,10 +72,15 @@ function clearDisplay() {
 function deleteLast() {
 
     if (display.innerText.length > 1) {
-        display.innerText =
-            display.innerText.slice(0, -1);
-    }
-    else {
+        display.innerText = display.innerText.slice(0, -1);
+    } else {
         display.innerText = "0";
     }
+}
+
+function percentage() {
+
+    let number = Number(display.innerText);
+
+    display.innerText = number / 100;
 }
