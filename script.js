@@ -4,7 +4,7 @@ let firstNumber = "";
 let operator = "";
 let waitingForSecondNumber = false;
 
-let calculationHistory = [
+let calculationHistory = [];
 
 function appendNumber(number) {
 
