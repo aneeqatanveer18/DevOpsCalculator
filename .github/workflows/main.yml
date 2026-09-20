@@ -1,0 +1,35 @@
+name: Calculator CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check HTML file
+        run: test -f index.html
+
+      - name: Check CSS file
+        run: test -f style.css
+
+      - name: Check JavaScript file
+        run: test -f script.js
+
+      - name: Run basic application test
+        run: |
+          grep -q "Simple Calculator" index.html
+          grep -q "percentage" index.html
+          grep -q "calculationHistory" script.js
+
+      - name: Build/Test completed
+        run: echo "Calculator application checks passed successfully!"
