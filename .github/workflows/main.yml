@@ -9,27 +9,28 @@ on:
       - main
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Check HTML file
-        run: test -f index.html
+      - name: Check files
+        run: |
+          test -f index.html
+          test -f style.css
+          test -f script.js
 
-      - name: Check CSS file
-        run: test -f style.css
+      - name: Check JavaScript syntax
+        run: |
+          node --check script.js
 
-      - name: Check JavaScript file
-        run: test -f script.js
-
-      - name: Run basic application test
+      - name: Check calculator features
         run: |
           grep -q "Simple Calculator" index.html
           grep -q "percentage" index.html
           grep -q "calculationHistory" script.js
 
-      - name: Build/Test completed
-        run: echo "Calculator application checks passed successfully!"
+      - name: CI successful
+        run: echo "Calculator CI checks completed successfully."
