@@ -4,6 +4,8 @@ let firstNumber = "";
 let operator = "";
 let waitingForSecondNumber = false;
 
+let calculationHistory = [];
+
 function appendNumber(number) {
 
     if (display.innerText === "0" || waitingForSecondNumber) {
@@ -53,6 +55,21 @@ function calculate() {
         result = num1 / num2;
     }
 
+    let symbol = operator;
+
+    if (operator === "*") {
+        symbol = "×";
+    } else if (operator === "/") {
+        symbol = "÷";
+    }
+
+    let calculation =
+        firstNumber + " " + symbol + " " + secondNumber + " = " + result;
+
+    calculationHistory.unshift(calculation);
+
+    displayHistory();
+
     display.innerText = result;
 
     firstNumber = "";
@@ -81,6 +98,37 @@ function deleteLast() {
 function percentage() {
 
     let number = Number(display.innerText);
+    let result = number / 100;
 
-    display.innerText = number / 100;
+    let calculation = number + "% = " + result;
+
+    calculationHistory.unshift(calculation);
+
+    displayHistory();
+
+    display.innerText = result;
+}
+
+function displayHistory() {
+
+    let historyList = document.getElementById("historyList");
+
+    historyList.innerHTML = "";
+
+    calculationHistory.forEach(function(calculation) {
+
+        let historyItem = document.createElement("p");
+
+        historyItem.innerText = calculation;
+
+        historyList.appendChild(historyItem);
+    });
+}
+
+function clearHistory() {
+
+    calculationHistory = [];
+
+    document.getElementById("historyList").innerHTML =
+        "<p>No calculations yet.</p>";
 }
